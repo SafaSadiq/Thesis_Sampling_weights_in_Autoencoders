@@ -1,15 +1,17 @@
 from Modules.Kernel_Autoencoder import *
 
-dataset_index = 1 #set 0 for mnist and 1 for cifar
+dataset_index = 0 #set 0 for mnist and 1 for cifar
 plot_images = False #set True to visualize results
 dataset = ["mnist", "cifar"]
 
 #read dataset
 X_train, Y_train, X_test, Y_test, meanPoint = load_data(dataset[dataset_index], train_size=10000, test_size=2000)
+X_train_complete, Y_train_complete, X_test_complete, Y_test_complete, meanPoint_comp = \
+    load_data(dataset[dataset_index], train_size=60000, test_size=10000)
 image_shape = X_test.shape
 
 #create a classifier and train it using the train set
-sampled_head = classification(X_train, Y_train)
+sampled_head = classification(X_train_complete, Y_train_complete)
 
 '''
 TESTING FOR DIFFERENT LAYER WIDTHS
@@ -62,7 +64,7 @@ for width in layer_width[dataset_index]:
                'Train Reconstructed Accuracy': train_acc_reconstructed,
                'Test Accuracy': test_acc,
                'Test Reconstructed Accuracy': test_acc_reconstructed}
-    with open('Kernel_Autoencoder_Result.txt', 'a') as convert_file:
+    with open('Results/Kernel_Autoencoder_Result.txt', 'a') as convert_file:
         convert_file.write(json.dumps(details))
         convert_file.write("\n")
 
@@ -121,7 +123,7 @@ for enc in encoding_dim[dataset_index]:
                'Train Reconstructed Accuracy': train_acc_reconstructed,
                'Test Accuracy': test_acc,
                'Test Reconstructed Accuracy': test_acc_reconstructed}
-    with open('Kernel_Autoencoder_Result.txt', 'a') as convert_file:
+    with open('Results/Kernel_Autoencoder_Result.txt', 'a') as convert_file:
         convert_file.write(json.dumps(details))
         convert_file.write("\n")
 
@@ -179,7 +181,7 @@ for pp in similar_samples_size:
                'Train Reconstructed Accuracy': train_acc_reconstructed,
                'Test Accuracy': test_acc,
                'Test Reconstructed Accuracy': test_acc_reconstructed}
-    with open('Kernel_Autoencoder_Result.txt', 'a') as convert_file:
+    with open('Results/Kernel_Autoencoder_Result.txt', 'a') as convert_file:
         convert_file.write(json.dumps(details))
         convert_file.write("\n")
 

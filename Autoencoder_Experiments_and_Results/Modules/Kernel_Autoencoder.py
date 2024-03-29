@@ -28,11 +28,12 @@ def load_data(dataset, train_size=20000, test_size=2500):
     X_test = X_test.reshape(len(X_test), np.prod(X_test.shape[1:]))
 
     #Choose a random subset as the train and test set (because of memory constraints)
-    random_indices = np.random.choice(X_train.shape[0],size=train_size,replace=False)
-    random_indices_test = np.random.choice(X_test.shape[0],size=test_size,replace=False)
+    if train_size<60000:
+        random_indices = np.random.choice(X_train.shape[0],size=train_size,replace=False)
+        random_indices_test = np.random.choice(X_test.shape[0],size=test_size,replace=False)
 
-    X_train, Y_train = X_train[random_indices, :], Y_train[random_indices]
-    X_test, Y_test = X_test[random_indices_test, :], Y_test[random_indices_test]
+        X_train, Y_train = X_train[random_indices, :], Y_train[random_indices]
+        X_test, Y_test = X_test[random_indices_test, :], Y_test[random_indices_test]
 
     #Normalize data
     X_train = X_train/255
