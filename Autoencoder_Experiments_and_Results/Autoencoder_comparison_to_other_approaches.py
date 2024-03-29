@@ -76,7 +76,7 @@ for j in range(len(name_of_appraoch)):
                'Train Reconstructed Accuracy': train_acc_reconstructed,
                'Test Reconstructed Accuracy': test_acc_reconstructed}
 
-    with open('Autoencoder_Comparisons.txt', 'a') as convert_file:
+    with open('Results\Autoencoder_Comparisons.txt', 'a') as convert_file:
         convert_file.write(json.dumps(details))
         convert_file.write("\n")
 
